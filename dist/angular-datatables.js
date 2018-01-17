@@ -15,6 +15,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 
     /* @ngInject */
     function dataTable($q, $http, $log, DTRendererFactory, DTRendererService, DTPropertyUtil) {
+
         compileDirective.$inject = ['tElm'];
         ControllerDirective.$inject = ['$scope'];
         return {
@@ -943,8 +944,9 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
             function _destroyAndCompile() {
                 if (_newParentScope) {
                     _newParentScope.$destroy();
+                } else {
+                    _oTable.ngDestroy();
                 }
-                _oTable.ngDestroy();
                 // Re-compile because we lost the angular binding to the existing data
                 _$elem.html(_staticHTML);
                 _newParentScope = _parentScope.$new();
